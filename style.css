@@ -23,3 +23,58 @@ button {
 h1, h2, h3, p {
     margin-top: 0;
 }
+
+.oldal-elrendezes {
+    display: flex;
+    min-height: 100vh;
+}
+
+.oldalsav {
+    width: 230px;
+    padding: 25px 18px;
+    background-color: #20344f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.oldalsav h1 {
+    margin-bottom: 5px;
+    font-size: 23px;
+}
+
+.oldalsav-alcim {
+    color: #c8d2df;
+    font-size: 13px;
+    margin-bottom: 35px;
+}
+
+.oldalsav nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.menu-gomb {
+    border: 0;
+    background: transparent;
+    color: #e2e8f0;
+    text-align: left;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.menu-gomb:hover,
+.menu-gomb.aktiv {
+    background-color: #365578;
+    color: white;
+}
+
+.oldalsav-alul {
+    margin-top: auto;
+    padding-top: 25px;
+    color: #c8d2df;
+    font-size: 12px;
+}
