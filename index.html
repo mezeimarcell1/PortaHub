@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechwartHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="oldal-elrendezes">
+        <aside class="oldalsav">
+            <h1>PortaHub</h1>
+            <p class="oldalsav-alcim">Mechwart portai adminisztráció</p>
+
+            <nav>
+                <button class="menu-gomb aktiv" data-page="dashboard">Áttekintés</button>
+                <button class="menu-gomb" data-page="visitors">Látogatók</button>
+                <button class="menu-gomb" data-page="phones">Telefonkezelés</button>
+                <button class="menu-gomb" data-page="exits">Diákok kilépése</button>
+                <button class="menu-gomb" data-page="duty">Portai szolgálat</button>
+                <button class="menu-gomb" data-page="logbook">Portai napló</button>
+                <button class="menu-gomb" data-page="messages">Üzenetek</button>
+            </nav>
+
+            <p class="oldalsav-alul">MechwartHub · Iskolai projekt</p>
+        </aside>
+
+        <main class="fo-resz">
+            <header class="felso-sav">
+                <p>Portai rendszer / <strong id="breadcrumbText">Áttekintés</strong></p>
+                <span id="todayText"></span>
+            </header>
+
+            <div class="tartalom">
+                <section class="oldal aktiv" id="page-dashboard">
+                    <h2>Áttekintés</h2>
+                    <p class="leiras">A porta napi feladatainak összefoglalója.</p>
+
+                    <div class="stat-grid">
+                        <article class="stat-doboz">
+                            <p>Aktív látogatók</p>
+                            <strong id="statVisitors">0</strong>
+                        </article>
+                        <article class="stat-doboz">
+                            <p>Leadott telefonok</p>
+                            <strong id="statPhones">0</strong>
+                        </article>
+                        <article class="stat-doboz">
+                            <p>Mai kilépések</p>
+                            <strong id="statExits">0</strong>
+                        </article>
+                        <article class="stat-doboz">
+                            <p>Átadásra váró üzenetek</p>
+                            <strong id="statMessages">0</strong>
+                        </article>
+                    </div>
+
+                    <article class="kartya">
+                        <h3>Gyorsműveletek</h3>
+                        <div class="gyors-gombok">
+                            <button class="gyors-gomb" data-go="visitors">Új látogató</button>
+                            <button class="gyors-gomb" data-go="phones">Telefon átvétele</button>
+                            <button class="gyors-gomb" data-go="exits">Új kilépés</button>
+                            <button class="gyors-gomb" data-go="logbook">Naplóbejegyzés</button>
+                        </div>
+                    </article>
+
+                    <article class="kartya">
+                        <h3>Legutóbbi események</h3>
+                        <div id="recentActivity">Még nincs rögzített esemény.</div>
+                    </article>
+                </section>
+
+                <section class="oldal" id="page-visitors">
+                    <h2>Látogatók</h2>
+                    <p class="leiras">Az iskolába érkező vendégek nyilvántartása.</p>
+                    <div class="ket-oszlop">
+                        <article class="kartya">
+                            <h3>Új látogató felvétele</h3>
+                            <form id="visitorForm">
+                                <label for="visitorName">Látogató neve</label>
+                                <input id="visitorName" required placeholder="Teljes név">
+
+                                <label for="visitorHost">Kit keres?</label>
+                                <input id="visitorHost" required placeholder="Például: Kiss Anna tanárnő">
+
+                                <label for="visitorReason">Látogatás célja</label>
+                                <select id="visitorReason">
+                                    <option>Ügyintézés</option>
+                                    <option>Időpont egyeztetés</option>
+                                    <option>Karbantartás</option>
+                                    <option>Szállítás</option>
+                                    <option>Egyéb</option>
+                                </select>
+
+                                <button class="fo-gomb" type="submit">Látogató rögzítése</button>
+                            </form>
+                        </article>
+
+                        <article class="kartya">
+                            <h3>Aktuális látogatók <span id="visitorCount">0 fő</span></h3>
+                            <div class="tabla-gorgeto">
+                                <table>
+                                    <thead>
+                                        <tr><th>Név</th><th>Kit keres?</th><th>Érkezés</th><th>Művelet</th></tr>
+                                    </thead>
+                                    <tbody id="visitorTable"></tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="oldal" id="page-phones">
+                    <h2>Telefonkezelés</h2>
+                    <p class="leiras">Ideiglenesen átvett telefonok nyilvántartása.</p>
+                    <p class="figyelmeztetes">A modult az iskola tényleges telefonkezelési eljárásához kell igazítani.</p>
+                    <div class="ket-oszlop">
+                        <article class="kartya">
+                            <h3>Telefon átvétele</h3>
+                            <form id="phoneForm">
+                                <label for="phoneStudent">Diák neve</label>
+                                <input id="phoneStudent" required placeholder="Diák teljes neve">
+
+                                <label for="phoneClass">Osztály</label>
+                                <input id="phoneClass" required placeholder="Például: 12.F">
+
+                                <label for="phonePlace">Tárolási hely</label>
+                                <input id="phonePlace" required placeholder="Például: 2-es szekrény">
+
+                                <button class="fo-gomb" type="submit">Telefon átvételének rögzítése</button>
+                            </form>
+                        </article>
+
+                        <article class="kartya">
+                            <h3>Visszaadásra vár <span id="phoneCount">0 db</span></h3>
+                            <div class="tabla-gorgeto">
+                                <table>
+                                    <thead>
+                                        <tr><th>Diák</th><th>Osztály</th><th>Tárolási hely</th><th>Művelet</th></tr>
+                                    </thead>
+                                    <tbody id="phoneTable"></tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="oldal" id="page-exits">
+                    <h2>Diákok kilépése</h2>
+                    <p class="leiras">A már engedélyezett kilépések adminisztrációja.</p>
+                    <div class="ket-oszlop">
+                        <article class="kartya">
+                            <h3>Új kilépés rögzítése</h3>
+                            <form id="exitForm">
+                                <label for="exitStudent">Diák neve</label>
+                                <input id="exitStudent" required>
+
+                                <label for="exitClass">Osztály</label>
+                                <input id="exitClass" required placeholder="Például: 11.F">
+
+                                <label for="exitAuthorizer">Engedélyező személy</label>
+                                <input id="exitAuthorizer" required>
+
+                                <label for="exitReason">Kilépés oka</label>
+                                <input id="exitReason" required>
+
+                                <button class="fo-gomb" type="submit">Kilépés rögzítése</button>
+                            </form>
+                        </article>
+
+                        <article class="kartya">
+                            <h3>Rögzített kilépések <span id="exitCount">0 db</span></h3>
+                            <div class="tabla-gorgeto">
+                                <table>
+                                    <thead>
+                                        <tr><th>Diák</th><th>Osztály</th><th>Időpont</th><th>Engedélyező</th></tr>
+                                    </thead>
+                                    <tbody id="exitTable"></tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="oldal" id="page-duty">
+                    <h2>Portai szolgálat</h2>
+                    <p class="leiras">A portai szolgálatot végző diákok beosztása.</p>
+                    <div class="ket-oszlop">
+                        <article class="kartya">
+                            <h3>Diák hozzáadása</h3>
+                            <form id="dutyForm">
+                                <label for="dutyName">Diák neve</label>
+                                <input id="dutyName" required>
+
+                                <label for="dutyClass">Osztály</label>
+                                <input id="dutyClass" required placeholder="Például: 12.F">
+
+                                <label for="dutyTime">Szolgálat időpontja</label>
+                                <input id="dutyTime" required placeholder="Például: 7:30–14:05">
+
+                                <button class="fo-gomb" type="submit">Beosztás rögzítése</button>
+                            </form>
+                        </article>
+
+                        <article class="kartya">
+                            <h3>Beosztott diákok</h3>
+                            <div class="tabla-gorgeto">
+                                <table>
+                                    <thead>
+                                        <tr><th>Név</th><th>Osztály</th><th>Időpont</th><th>Jelenlét</th></tr>
+                                    </thead>
+                                    <tbody id="dutyTable"></tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="oldal" id="page-logbook">
+                    <h2>Portai napló</h2>
+                    <p class="leiras">Fontos események és feladatok feljegyzése.</p>
+                    <article class="kartya">
+                        <h3>Új naplóbejegyzés</h3>
+                        <form id="logForm">
+                            <label for="logType">Bejegyzés típusa</label>
+                            <select id="logType">
+                                <option>Általános esemény</option>
+                                <option>Hiba vagy probléma</option>
+                                <option>Átadás</option>
+                                <option>Egyéb</option>
+                            </select>
+
+                            <label for="logDescription">Leírás</label>
+                            <textarea id="logDescription" required rows="3"></textarea>
+
+                            <button class="fo-gomb" type="submit">Bejegyzés mentése</button>
+                        </form>
+                    </article>
+                    <article class="kartya">
+                        <h3>Korábbi bejegyzések <span id="logCount">0 db</span></h3>
+                        <div id="logList"></div>
+                    </article>
+                </section>
+
+                <section class="oldal" id="page-messages">
+                    <h2>Üzenetek</h2>
+                    <p class="leiras">A portára érkező üzenetek nyilvántartása.</p>
+                    <article class="kartya">
+                        <h3>Új üzenet</h3>
+                        <form id="messageForm">
+                            <label for="messageTo">Címzett</label>
+                            <input id="messageTo" required placeholder="Kinek szól az üzenet?">
+
+                            <label for="messageText">Üzenet</label>
+                            <textarea id="messageText" required rows="3"></textarea>
+
+                            <button class="fo-gomb" type="submit">Üzenet rögzítése</button>
+                        </form>
+                    </article>
+                    <article class="kartya">
+                        <h3>Átadásra váró üzenetek <span id="messageCount">0 db</span></h3>
+                        <div id="messageList"></div>
+                    </article>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+</html>
