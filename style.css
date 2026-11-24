@@ -78,3 +78,68 @@ h1, h2, h3, p {
     color: #c8d2df;
     font-size: 12px;
 }
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.stat-doboz {
+    background-color: white;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.stat-doboz p {
+    color: #666666;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.stat-doboz strong {
+    font-size: 30px;
+    color: #244d78;
+}
+
+.kartya {
+    background-color: white;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.kartya h3 {
+    font-size: 17px;
+    margin-bottom: 17px;
+}
+
+.kartya h3 span {
+    color: #777777;
+    font-size: 13px;
+    font-weight: normal;
+    margin-left: 8px;
+}
+
+.gyors-gombok {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.gyors-gomb {
+    min-height: 65px;
+    border: 1px solid #cbd5df;
+    background-color: #f8fafc;
+    color: #244d78;
+    border-radius: 5px;
+    padding: 12px;
+    text-align: left;
+}
+
+.gyors-gomb:hover {
+    background-color: #edf3f9;
+}
