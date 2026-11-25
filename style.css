@@ -244,3 +244,43 @@ tbody tr:hover {
 .kis-gomb:hover {
     background-color: #dce9f5;
 }
+
+.lista-elem {
+    padding: 13px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.lista-elem:last-child {
+    border-bottom: 0;
+}
+
+.lista-elem strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.lista-elem small {
+    color: #777777;
+}
+
+.lista-elem p {
+    margin: 7px 0 0;
+    color: #444444;
+    line-height: 1.5;
+}
+
+.toast {
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 13px 18px;
+    background-color: #263c54;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px #00000025;
+}
+
+.toast.lathato {
+    display: block;
+}
