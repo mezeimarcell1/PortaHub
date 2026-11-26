@@ -350,3 +350,24 @@ tbody tr:hover {
         padding: 15px;
     }
 }
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #9bb9d6;
+    border-color: #285783;
+}
+
+button:focus-visible {
+    outline: 2px solid #285783;
+    outline-offset: 2px;
+}
+
+.oldal h2 {
+    color: #20344f;
+}
+
+#recentActivity {
+    color: #555555;
+    line-height: 1.5;
+}
