@@ -273,3 +273,37 @@ document.getElementById("dutyForm").addEventListener("submit", function (esemeny
     this.reset();
     uzenetMutatasa("A szolgálati beosztás rögzítve.");
 });
+
+function naploMegjelenitese() {
+    document.getElementById("logCount").textContent = naplo.length + " db";
+    const lista = document.getElementById("logList");
+
+    if (naplo.length === 0) {
+        lista.innerHTML = "<p>Még nincs naplóbejegyzés.</p>";
+        return;
+    }
+
+    lista.innerHTML = naplo.slice().reverse().map(function (bejegyzes) {
+        return '<div class="lista-elem">' +
+            '<strong>' + biztonsagosSzoveg(bejegyzes.tipus) + '</strong>' +
+            '<small>' + bejegyzes.ido + '</small>' +
+            '<p>' + biztonsagosSzoveg(bejegyzes.leiras) + '</p>' +
+            '</div>';
+    }).join("");
+}
+
+document.getElementById("logForm").addEventListener("submit", function (esemeny) {
+    esemeny.preventDefault();
+
+    naplo.push({
+        id: ujAzonosito(),
+        tipus: document.getElementById("logType").value,
+        leiras: document.getElementById("logDescription").value.trim(),
+        ido: jelenlegiIdo()
+    });
+
+    adatokMentese();
+    frissitMindent();
+    this.reset();
+    uzenetMutatasa("A naplóbejegyzés mentve.");
+});
