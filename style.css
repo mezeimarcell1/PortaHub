@@ -284,3 +284,90 @@ tbody tr:hover {
 .toast.lathato {
     display: block;
 }
+
+@media (max-width: 1000px) {
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gyors-gombok {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ket-oszlop {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .oldal-elrendezes {
+        display: block;
+    }
+
+    .oldalsav {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .oldalsav-alcim {
+        margin-bottom: 15px;
+    }
+
+    .oldalsav nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .oldalsav-alul {
+        display: none;
+    }
+
+    .felso-sav {
+        padding: 0 16px;
+    }
+
+    .tartalom {
+        padding: 18px 12px;
+    }
+
+    .stat-grid {
+        gap: 9px;
+    }
+
+    .stat-doboz {
+        padding: 13px;
+    }
+
+    .stat-doboz strong {
+        font-size: 25px;
+    }
+
+    .gyors-gombok {
+        grid-template-columns: 1fr;
+    }
+
+    .kartya {
+        padding: 15px;
+    }
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #9bb9d6;
+    border-color: #285783;
+}
+
+button:focus-visible {
+    outline: 2px solid #285783;
+    outline-offset: 2px;
+}
+
+.oldal h2 {
+    color: #20344f;
+}
+
+#recentActivity {
+    color: #555555;
+    line-height: 1.5;
+}
