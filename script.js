@@ -236,3 +236,40 @@ document.getElementById("exitForm").addEventListener("submit", function (esemeny
     this.reset();
     uzenetMutatasa("A kilépés rögzítve.");
 });
+
+function szolgalatokMegjelenitese() {
+    const tabla = document.getElementById("dutyTable");
+
+    if (szolgalatok.length === 0) {
+        uresTabla("dutyTable", 4, "Még nincs beosztott diák.");
+        return;
+    }
+
+    tabla.innerHTML = szolgalatok.map(function (diak) {
+        const gombSzoveg = diak.jelen ? "Jelen van" : "Jelenlét jelölése";
+
+        return '<tr>' +
+            '<td>' + biztonsagosSzoveg(diak.nev) + '</td>' +
+            '<td>' + biztonsagosSzoveg(diak.osztaly) + '</td>' +
+            '<td>' + biztonsagosSzoveg(diak.idopont) + '</td>' +
+            '<td><button class="kis-gomb" data-action="szolgalat-jelen" data-id="' + diak.id + '">' + gombSzoveg + '</button></td>' +
+            '</tr>';
+    }).join("");
+}
+
+document.getElementById("dutyForm").addEventListener("submit", function (esemeny) {
+    esemeny.preventDefault();
+
+    szolgalatok.push({
+        id: ujAzonosito(),
+        nev: document.getElementById("dutyName").value.trim(),
+        osztaly: document.getElementById("dutyClass").value.trim(),
+        idopont: document.getElementById("dutyTime").value.trim(),
+        jelen: false
+    });
+
+    adatokMentese();
+    frissitMindent();
+    this.reset();
+    uzenetMutatasa("A szolgálati beosztás rögzítve.");
+});
