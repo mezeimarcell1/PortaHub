@@ -59,8 +59,95 @@ function uzenetMutatasa(szoveg) {
 }
 
 function frissitMindent() {
-    // A megjelenites a kesobbi commitokban keszul el.
+    latogatokMegjelenitese();
+    telefonokMegjelenitese();
+    kilepesekMegjelenitese();
+    szolgalatokMegjelenitese();
+    naploMegjelenitese();
+    uzenetekMegjelenitese();
+    dashboardFrissitese();
 }
+
+function dashboardFrissitese() {
+    const aktivLatogatok = latogatok.filter(function (latogato) {
+        return !latogato.tavozott;
+    }).length;
+
+    const varakozoTelefonok = telefonok.filter(function (telefon) {
+        return !telefon.visszaadva;
+    }).length;
+
+    const varakozoUzenetek = uzenetek.filter(function (uzenet) {
+        return !uzenet.atadva;
+    }).length;
+
+    document.getElementById("statVisitors").textContent = aktivLatogatok;
+    document.getElementById("statPhones").textContent = varakozoTelefonok;
+    document.getElementById("statExits").textContent = kilepesek.length;
+    document.getElementById("statMessages").textContent = varakozoUzenetek;
+
+    const esemenyek = [];
+
+    latogatok.forEach(function (latogato) {
+        esemenyek.push({
+            id: latogato.id,
+            cim: "Látogató rögzítve",
+            reszlet: latogato.nev,
+            ido: latogato.erkezes
+        });
+    });
+
+    telefonok.forEach(function (telefon) {
+        esemenyek.push({
+            id: telefon.id,
+            cim: "Telefon átvétele",
+            reszlet: telefon.nev,
+            ido: telefon.ido
+        });
+    });
+
+    kilepesek.forEach(function (kilepes) {
+        esemenyek.push({
+            id: kilepes.id,
+            cim: "Diák kilépése rögzítve",
+            reszlet: kilepes.nev,
+            ido: kilepes.ido
+        });
+    });
+
+    naplo.forEach(function (bejegyzes) {
+        esemenyek.push({
+            id: bejegyzes.id,
+            cim: bejegyzes.tipus,
+            reszlet: bejegyzes.leiras,
+            ido: bejegyzes.ido
+        });
+    });
+
+    esemenyek.sort(function (a, b) {
+        return b.id - a.id;
+    });
+
+    const lista = document.getElementById("recentActivity");
+
+    if (esemenyek.length === 0) {
+        lista.textContent = "Még nincs rögzített esemény.";
+        return;
+    }
+
+    lista.innerHTML = esemenyek.slice(0, 5).map(function (esemeny) {
+        return '<div class="lista-elem">' +
+            '<strong>' + biztonsagosSzoveg(esemeny.cim) + '</strong>' +
+            '<p>' + biztonsagosSzoveg(esemeny.reszlet) + '</p>' +
+            '<small>' + esemeny.ido + '</small>' +
+            '</div>';
+    }).join("");
+}
+
+const maiDatum = new Date();
+document.getElementById("todayText").textContent = maiDatum.toLocaleDateString("hu-HU");
+
+frissitMindent();
 
 adatokBetoltese();
 function oldalMegnyitasa(oldalNeve) {
