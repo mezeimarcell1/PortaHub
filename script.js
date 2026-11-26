@@ -97,3 +97,64 @@ document.querySelectorAll(".gyors-gomb").forEach(function (gomb) {
         oldalMegnyitasa(gomb.dataset.go);
     });
 });
+
+function biztonsagosSzoveg(szoveg) {
+    return String(szoveg).replace(/[&<>"']/g, function (karakter) {
+        const karakterek = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
+
+        return karakterek[karakter];
+    });
+}
+
+function uresTabla(tbodyId, oszlopok, szoveg) {
+    document.getElementById(tbodyId).innerHTML =
+        '<tr><td colspan="' + oszlopok + '">' + szoveg + '</td></tr>';
+}
+
+function latogatokMegjelenitese() {
+    const aktivLatogatok = latogatok.filter(function (latogato) {
+        return !latogato.tavozott;
+    });
+
+    document.getElementById("visitorCount").textContent = aktivLatogatok.length + " fő";
+    const tabla = document.getElementById("visitorTable");
+
+    if (aktivLatogatok.length === 0) {
+        uresTabla("visitorTable", 4, "Jelenleg nincs bent látogató.");
+        return;
+    }
+
+    tabla.innerHTML = aktivLatogatok.map(function (latogato) {
+        return '<tr>' +
+            '<td>' + biztonsagosSzoveg(latogato.nev) + '</td>' +
+            '<td>' + biztonsagosSzoveg(latogato.kitKeres) + '</td>' +
+            '<td>' + latogato.erkezes + '</td>' +
+            '<td><button class="kis-gomb" data-action="latogato-tavozott" data-id="' + latogato.id + '">Távozott</button></td>' +
+            '</tr>';
+    }).join("");
+}
+
+document.getElementById("visitorForm").addEventListener("submit", function (esemeny) {
+    esemeny.preventDefault();
+
+    const latogato = {
+        id: ujAzonosito(),
+        nev: document.getElementById("visitorName").value.trim(),
+        kitKeres: document.getElementById("visitorHost").value.trim(),
+        cel: document.getElementById("visitorReason").value,
+        erkezes: jelenlegiIdo(),
+        tavozott: false
+    };
+
+    latogatok.push(latogato);
+    adatokMentese();
+    frissitMindent();
+    this.reset();
+    uzenetMutatasa("A látogató rögzítése sikerült.");
+});
