@@ -347,3 +347,61 @@ document.getElementById("messageForm").addEventListener("submit", function (esem
     this.reset();
     uzenetMutatasa("Az üzenet rögzítve.");
 });
+
+document.addEventListener("click", function (esemeny) {
+    const gomb = esemeny.target.closest("[data-action]");
+
+    if (!gomb) {
+        return;
+    }
+
+    const id = Number(gomb.dataset.id);
+    const muvelet = gomb.dataset.action;
+
+    if (muvelet === "latogato-tavozott") {
+        const latogato = latogatok.find(function (elem) {
+            return elem.id === id;
+        });
+
+        if (latogato) {
+            latogato.tavozott = true;
+            uzenetMutatasa("A látogató távozása rögzítve.");
+        }
+    }
+
+    if (muvelet === "telefon-visszaadva") {
+        const telefon = telefonok.find(function (elem) {
+            return elem.id === id;
+        });
+
+        if (telefon) {
+            telefon.visszaadva = true;
+            uzenetMutatasa("A telefon visszaadása rögzítve.");
+        }
+    }
+
+    if (muvelet === "szolgalat-jelen") {
+        const diak = szolgalatok.find(function (elem) {
+            return elem.id === id;
+        });
+
+        if (diak) {
+            diak.jelen = true;
+            uzenetMutatasa("A jelenlét rögzítve.");
+        }
+    }
+
+    if (muvelet === "uzenet-atadva") {
+        const uzenet = uzenetek.find(function (elem) {
+            return elem.id === id;
+        });
+
+        if (uzenet) {
+            uzenet.atadva = true;
+            uzenetMutatasa("Az üzenet átadása rögzítve.");
+        }
+    }
+
+    adatokMentese();
+    frissitMindent();
+});
