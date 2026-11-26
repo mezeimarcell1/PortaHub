@@ -158,3 +158,44 @@ document.getElementById("visitorForm").addEventListener("submit", function (esem
     this.reset();
     uzenetMutatasa("A látogató rögzítése sikerült.");
 });
+
+function telefonokMegjelenitese() {
+    const varakozoTelefonok = telefonok.filter(function (telefon) {
+        return !telefon.visszaadva;
+    });
+
+    document.getElementById("phoneCount").textContent = varakozoTelefonok.length + " db";
+    const tabla = document.getElementById("phoneTable");
+
+    if (varakozoTelefonok.length === 0) {
+        uresTabla("phoneTable", 4, "Nincs visszaadásra váró telefon.");
+        return;
+    }
+
+    tabla.innerHTML = varakozoTelefonok.map(function (telefon) {
+        return '<tr>' +
+            '<td>' + biztonsagosSzoveg(telefon.nev) + '</td>' +
+            '<td>' + biztonsagosSzoveg(telefon.osztaly) + '</td>' +
+            '<td>' + biztonsagosSzoveg(telefon.hely) + '</td>' +
+            '<td><button class="kis-gomb" data-action="telefon-visszaadva" data-id="' + telefon.id + '">Visszaadva</button></td>' +
+            '</tr>';
+    }).join("");
+}
+
+document.getElementById("phoneForm").addEventListener("submit", function (esemeny) {
+    esemeny.preventDefault();
+
+    telefonok.push({
+        id: ujAzonosito(),
+        nev: document.getElementById("phoneStudent").value.trim(),
+        osztaly: document.getElementById("phoneClass").value.trim(),
+        hely: document.getElementById("phonePlace").value.trim(),
+        ido: jelenlegiIdo(),
+        visszaadva: false
+    });
+
+    adatokMentese();
+    frissitMindent();
+    this.reset();
+    uzenetMutatasa("A telefon átvétele rögzítve.");
+});
