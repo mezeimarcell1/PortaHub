@@ -307,3 +307,43 @@ document.getElementById("logForm").addEventListener("submit", function (esemeny)
     this.reset();
     uzenetMutatasa("A naplóbejegyzés mentve.");
 });
+
+function uzenetekMegjelenitese() {
+    const varakozoUzenetek = uzenetek.filter(function (uzenet) {
+        return !uzenet.atadva;
+    });
+
+    document.getElementById("messageCount").textContent = varakozoUzenetek.length + " db";
+    const lista = document.getElementById("messageList");
+
+    if (varakozoUzenetek.length === 0) {
+        lista.innerHTML = "<p>Nincs átadásra váró üzenet.</p>";
+        return;
+    }
+
+    lista.innerHTML = varakozoUzenetek.slice().reverse().map(function (uzenet) {
+        return '<div class="lista-elem">' +
+            '<strong>' + biztonsagosSzoveg(uzenet.cimzett) + '</strong>' +
+            '<small>' + uzenet.ido + '</small>' +
+            '<p>' + biztonsagosSzoveg(uzenet.szoveg) + '</p>' +
+            '<button class="kis-gomb" data-action="uzenet-atadva" data-id="' + uzenet.id + '">Átadva</button>' +
+            '</div>';
+    }).join("");
+}
+
+document.getElementById("messageForm").addEventListener("submit", function (esemeny) {
+    esemeny.preventDefault();
+
+    uzenetek.push({
+        id: ujAzonosito(),
+        cimzett: document.getElementById("messageTo").value.trim(),
+        szoveg: document.getElementById("messageText").value.trim(),
+        ido: jelenlegiIdo(),
+        atadva: false
+    });
+
+    adatokMentese();
+    frissitMindent();
+    this.reset();
+    uzenetMutatasa("Az üzenet rögzítve.");
+});
