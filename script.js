@@ -199,3 +199,40 @@ document.getElementById("phoneForm").addEventListener("submit", function (esemen
     this.reset();
     uzenetMutatasa("A telefon átvétele rögzítve.");
 });
+
+function kilepesekMegjelenitese() {
+    document.getElementById("exitCount").textContent = kilepesek.length + " db";
+    const tabla = document.getElementById("exitTable");
+
+    if (kilepesek.length === 0) {
+        uresTabla("exitTable", 4, "Még nincs rögzített kilépés.");
+        return;
+    }
+
+    tabla.innerHTML = kilepesek.slice().reverse().map(function (kilepes) {
+        return '<tr>' +
+            '<td>' + biztonsagosSzoveg(kilepes.nev) + '<br><small>' + biztonsagosSzoveg(kilepes.ok) + '</small></td>' +
+            '<td>' + biztonsagosSzoveg(kilepes.osztaly) + '</td>' +
+            '<td>' + kilepes.ido + '</td>' +
+            '<td>' + biztonsagosSzoveg(kilepes.engedelyezo) + '</td>' +
+            '</tr>';
+    }).join("");
+}
+
+document.getElementById("exitForm").addEventListener("submit", function (esemeny) {
+    esemeny.preventDefault();
+
+    kilepesek.push({
+        id: ujAzonosito(),
+        nev: document.getElementById("exitStudent").value.trim(),
+        osztaly: document.getElementById("exitClass").value.trim(),
+        engedelyezo: document.getElementById("exitAuthorizer").value.trim(),
+        ok: document.getElementById("exitReason").value.trim(),
+        ido: jelenlegiIdo()
+    });
+
+    adatokMentese();
+    frissitMindent();
+    this.reset();
+    uzenetMutatasa("A kilépés rögzítve.");
+});
