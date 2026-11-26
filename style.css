@@ -371,3 +371,203 @@ button:focus-visible {
     color: #555555;
     line-height: 1.5;
 }
+/* Az oldalak es a fo elrendezes. */
+.fo-resz {
+    flex: 1;
+    min-width: 0;
+}
+
+.felso-sav {
+    min-height: 60px;
+    padding: 14px 28px;
+    background-color: white;
+    border-bottom: 1px solid #dddddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.felso-sav p {
+    margin: 0;
+    color: #666666;
+    font-size: 14px;
+}
+
+.felso-sav span {
+    color: #666666;
+    font-size: 13px;
+}
+
+.tartalom {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 28px;
+}
+
+.oldal {
+    display: none;
+}
+
+.oldal.aktiv {
+    display: block;
+}
+
+.oldal h2 {
+    margin-bottom: 8px;
+    color: #20344f;
+    font-size: 25px;
+}
+
+.leiras {
+    margin-bottom: 22px;
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Kereses es szures a tablazatok felett. */
+.szurok {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.szurok input {
+    flex: 1;
+    min-width: 160px;
+}
+
+.szurok select {
+    width: auto;
+    min-width: 155px;
+}
+
+.ures-sor {
+    padding: 20px 10px;
+    color: #777777;
+    text-align: center;
+}
+
+/* A rekordok allapotat jelzo feliratok. */
+.allapot {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.allapot.kesz {
+    color: #28643a;
+    background-color: #e6f3e9;
+}
+
+.allapot.aktiv-allapot {
+    color: #245783;
+    background-color: #e8f0f8;
+}
+
+.allapot.varakozik {
+    color: #795b18;
+    background-color: #fff4d6;
+}
+
+.torles-gomb {
+    color: #8a3030;
+    border-color: #dfbcbc;
+    background-color: #fff6f6;
+}
+
+.torles-gomb:hover {
+    background-color: #f9e5e5;
+}
+
+.lista-fejlec,
+.lista-alja {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.lista-alja {
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.lista-elem p {
+    overflow-wrap: anywhere;
+}
+
+/* Kisebb kepernyon egymas ala kerulnek az elemek. */
+@media (max-width: 1000px) {
+    .fo-resz {
+        width: 100%;
+    }
+
+    .tartalom {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 650px) {
+    .felso-sav {
+        min-height: 54px;
+        padding: 12px 16px;
+    }
+
+    .felso-sav p {
+        font-size: 12px;
+    }
+
+    .felso-sav span {
+        font-size: 12px;
+    }
+
+    .tartalom {
+        padding: 18px 12px;
+    }
+
+    .szurok {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .szurok select {
+        width: 100%;
+    }
+
+    .lista-fejlec {
+        align-items: flex-start;
+    }
+}
+
+
+/* Biztonsagi mentes gombjai a felso savban. */
+.felso-akciok {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.fajl-valaszto {
+    display: inline-block;
+    font-size: 13px;
+}
+
+@media (max-width: 650px) {
+    .felso-sav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .felso-akciok {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
