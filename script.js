@@ -63,3 +63,37 @@ function frissitMindent() {
 }
 
 adatokBetoltese();
+function oldalMegnyitasa(oldalNeve) {
+    document.querySelectorAll(".oldal").forEach(function (oldal) {
+        oldal.classList.remove("aktiv");
+    });
+
+    document.querySelectorAll(".menu-gomb").forEach(function (gomb) {
+        gomb.classList.remove("aktiv");
+    });
+
+    const kivalasztottOldal = document.getElementById("page-" + oldalNeve);
+
+    if (kivalasztottOldal) {
+        kivalasztottOldal.classList.add("aktiv");
+    }
+
+    const kivalasztottGomb = document.querySelector('[data-page="' + oldalNeve + '"]');
+
+    if (kivalasztottGomb) {
+        kivalasztottGomb.classList.add("aktiv");
+        document.getElementById("breadcrumbText").textContent = kivalasztottGomb.textContent;
+    }
+}
+
+document.querySelectorAll(".menu-gomb").forEach(function (gomb) {
+    gomb.addEventListener("click", function () {
+        oldalMegnyitasa(gomb.dataset.page);
+    });
+});
+
+document.querySelectorAll(".gyors-gomb").forEach(function (gomb) {
+    gomb.addEventListener("click", function () {
+        oldalMegnyitasa(gomb.dataset.go);
+    });
+});
